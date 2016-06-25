@@ -43,6 +43,10 @@ public class PageDownloader {
 	public String get() throws IOException {
 		WebClient webClient = new WebClient();
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
+		webClient.getOptions().setActiveXNative(false);
+		webClient.getOptions().setAppletEnabled(false);
+		webClient.getOptions().setCssEnabled(false);
+		webClient.getOptions().setPopupBlockerEnabled(true);
 		HtmlPage doc = webClient.getPage(url);
 		webClient.close();
 		return DocumentToString(doc);
