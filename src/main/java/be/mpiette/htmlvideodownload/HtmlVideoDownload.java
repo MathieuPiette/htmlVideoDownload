@@ -16,12 +16,14 @@ public class HtmlVideoDownload {
 
 		options.addOption("url", true, "Url");
 		options.addOption("horizon", true, "Horizon");
+		options.addOption("target", true, "Target directory");
 
 		CommandLineParser parser = new DefaultParser();
 		CommandLine cmd = parser.parse(options, args);
 		if (cmd.hasOption("url")) {
 			String url = cmd.getOptionValue("url");
 			Integer horizon = Integer.valueOf(cmd.getOptionValue("horizon"));
+			String target = cmd.getOptionValue("target");
 
 			SiteCrawler crawler = new SiteCrawler(url, horizon);
 			Map<String, Page> pages = crawler.crawl();
@@ -29,6 +31,10 @@ public class HtmlVideoDownload {
 			Set<String> videos = new HashSet<String>();
 			for (Page p : pages.values()) {
 				videos.addAll(p.videos);
+			}
+
+			for (String video : videos) {
+				new FileDownloader(video, target).download(false);
 			}
 
 		}

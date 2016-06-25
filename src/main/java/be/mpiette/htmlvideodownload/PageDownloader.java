@@ -47,6 +47,8 @@ public class PageDownloader {
 		webClient.getOptions().setAppletEnabled(false);
 		webClient.getOptions().setCssEnabled(false);
 		webClient.getOptions().setPopupBlockerEnabled(true);
+		webClient.getOptions().setPrintContentOnFailingStatusCode(false);
+		webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 		HtmlPage doc = webClient.getPage(url);
 		webClient.close();
 		return DocumentToString(doc);
