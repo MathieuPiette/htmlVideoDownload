@@ -1,7 +1,7 @@
 package be.mpiette.htmlvideodownload;
 
 public class Link {
-	public String text, url;
+	public final String text, url;
 
 	public Link(String text, String url) {
 		super();

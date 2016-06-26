@@ -2,6 +2,8 @@ package be.mpiette.htmlvideodownload;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.logging.Logger;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -11,6 +13,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
@@ -33,15 +36,16 @@ public class PageDownloader {
 		}
 	}
 
-	private final String url;
+	private final URL url;
 
-	public PageDownloader(String url) {
+	public PageDownloader(URL url) {
 		super();
 		this.url = url;
 	}
 
 	public String get() throws IOException {
-		WebClient webClient = new WebClient();
+		Logger.getLogger("com.gargoylesoftware").setLevel(java.util.logging.Level.OFF);
+		WebClient webClient = new WebClient(BrowserVersion.FIREFOX_45);
 		webClient.getOptions().setThrowExceptionOnScriptError(false);
 		webClient.getOptions().setActiveXNative(false);
 		webClient.getOptions().setAppletEnabled(false);
