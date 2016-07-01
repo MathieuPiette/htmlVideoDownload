@@ -27,7 +27,6 @@ public class SiteCrawler extends Thread {
 	}
 
 	private void consume(PageQueueElement pageQueueElement) {
-		System.out.println("Consuming " + pageQueueElement.url + " (" + pageQueueElement.horizon + ")");
 		try {
 			String doc = new PageDownloader(pageQueueElement.url).get();
 			Page page = new PageParser(Jsoup.parse(doc)).parse();
@@ -53,7 +52,6 @@ public class SiteCrawler extends Thread {
 					}
 					synchronized (urlsToIgnore) {
 						if (urlsToIgnore.contains(subLink)) {
-							System.out.println("Ignoring " + subLink + " (already visited or in queue)");
 							continue;
 						}
 						urlsToIgnore.add(subLink);
